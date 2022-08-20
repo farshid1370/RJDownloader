@@ -36,4 +36,25 @@ public static class HtmlUtils
 
         return musicList;
     }
+    public static async Task<PlayListInfo> GetPlayListInfo(string playListUrl, string baseDownloadUrl)
+    {
+        var web = new HtmlWeb();
+        var htmlDoc = await web.LoadFromWebAsync(playListUrl);
+        var playListHtmlDoc = htmlDoc.DocumentNode.SelectNodes("//body/div").First(x => x.Id == "playlist").InnerHtml;
+        htmlDoc.LoadHtml(playListHtmlDoc);
+
+        var mainPanelHtmlDoc = htmlDoc.DocumentNode.SelectSingleNode("//div").SelectNodes("//div").First(x => x.Attributes["class"].Value == "mainPanel").InnerHtml;
+        htmlDoc.LoadHtml(mainPanelHtmlDoc);
+
+        var playListName = htmlDoc.DocumentNode.SelectSingleNode("//div").SelectNodes("//div")
+            .First(x => x.Attributes["class"].Value == "songInfo").SelectSingleNode("//h2").InnerText;
+
+        var playList = new PlayListInfo
+        {
+            Id = playListUrl.Split('/').Last(),
+            Name = playListName
+        };
+       
+        return playList;
+    }
 }
