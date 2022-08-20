@@ -32,7 +32,10 @@ public static class Downloader
            
         }
         await File.WriteAllBytesAsync(outputPath, fileBytes);
-       
-       
+        Console.WriteLine($"{outputPath} Downloaded!");
+        Console.WriteLine("---------------------------------------------------------");
+      
+
+
     }
 }
