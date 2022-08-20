@@ -19,7 +19,7 @@ public class PlayListDownloader
         foreach (var musicInfo in musicList)
         {
             var pathToDownload = @$"{playListInfo.Name}/{musicInfo.ArtistName} - {musicInfo.SongName} (320).mp3";
-            var result = await Downloader.DownloadFileAsync(musicInfo.DownloadUrl, pathToDownload);
+            await Downloader.DownloadFileAsync(musicInfo.DownloadUrl, pathToDownload);
 
         }
         return playListInfo;
