@@ -2,7 +2,7 @@
 
 public static class Downloader
 {
-    private static readonly HttpClient _httpClient = new HttpClient {Timeout = TimeSpan.FromMinutes(5)};
+    private static readonly HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
 
     public static async Task<bool> DownloadFileAsync(string uri
         , string outputPath)
@@ -23,6 +23,7 @@ public static class Downloader
         }
         Console.WriteLine($"{outputPath} downloading ...");
         var fileBytes = await _httpClient.GetByteArrayAsync(uri);
+        if (fileBytes.Length <= 0) return true
         await File.WriteAllBytesAsync(outputPath, fileBytes);
         Console.WriteLine($"{outputPath} downloaded!");
         Console.WriteLine("---------------------------------------------------------");
