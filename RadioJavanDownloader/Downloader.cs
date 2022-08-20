@@ -19,6 +19,7 @@ public static class Downloader
         {
             Console.WriteLine($"{outputPath} is exists");
             Console.WriteLine("---------------------------------------------------------");
+            return;
           
         }
         Console.WriteLine($"{outputPath} downloading ...");
@@ -27,6 +28,7 @@ public static class Downloader
         {
             Console.WriteLine($"{outputPath} failed!");
             Console.WriteLine("---------------------------------------------------------");
+            return;
            
         }
         await File.WriteAllBytesAsync(outputPath, fileBytes);
